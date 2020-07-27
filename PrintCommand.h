@@ -11,6 +11,8 @@ public:
 	{
 		if (std::find(infoLine.begin(), infoLine.end(), ' ') == infoLine.end())
 		{
+			if (cars_rentals.empty())
+				std::cout << "cars_rentals is empty\n";
 			for (auto el : cars_rentals)
 			{
 				std::cout << el.name() << " " << el.price() << "\n";

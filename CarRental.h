@@ -1,12 +1,12 @@
 #pragma once
 #ifndef CAR_RENTAL_H
 #define CAR_RENTAL_H
-#include <string>
-#include <vector>
-#include <map>
 #include <iostream>
 #include <cassert>
 #include <algorithm>
+#include <string>
+#include <vector>
+#include <map>
 #include "Car.h"
 #include "FileManagement.h"
 #include "AbstractCommands.h"
@@ -15,6 +15,8 @@
 #include "PrintCommand.h"
 #include "HelpCommand.h"
 #include "ExitCommand.h"
+#include "SearchCommand.h"
+#include "EditCommand.h"
 
 class CarRental
 {
@@ -24,8 +26,6 @@ public:
 	double price()const;
 	void execute();
 	virtual ~CarRental();
-private:
-	explicit CarRental(std::string name, const double price);
 private:
 	std::string name_;
 	double price_;
@@ -38,5 +38,7 @@ private:
 	PrintCommand* print_command;
 	HelpCommand* help_command;
 	ExitCommand* exit_command;
+	SearchCommand* search_command;
+	EditCommand* edit_command;
 };
 #endif

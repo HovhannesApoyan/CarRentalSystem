@@ -1,7 +1,6 @@
 #pragma once
 #ifndef ADD_COMMAND_H
 #define ADD_COMMAND_H
-#include <iostream>
 #include "AbstractCommands.h"
 #include "FileManagement.h"
 #include "Parser.h"

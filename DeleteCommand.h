@@ -1,10 +1,8 @@
 #pragma once
 #ifndef DELETE_COMMAND_H
 #define DELETE_COMMAND_H
-#include <iostream>
 #include "AbstractCommands.h"
 #include "FileManagement.h"
-#include "Parser.h"
 
 class DeleteCommand : public AbstractCommands
 {

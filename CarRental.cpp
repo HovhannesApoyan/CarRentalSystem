@@ -1,29 +1,26 @@
 #include "CarRental.h"
 
 CarRental::CarRental()
-	:abstract_commands_ptr(nullptr),
-	add_command(new AddCommand),
-	delete_command(new DeleteCommand),
-	print_command(new PrintCommand),
-	help_command(new HelpCommand),
-	exit_command(new ExitCommand)
+	:abstract_commands_ptr(nullptr)
+	, add_command(new AddCommand)
+	, delete_command(new DeleteCommand)
+	, print_command(new PrintCommand)
+	, help_command(new HelpCommand)
+	, exit_command(new ExitCommand)
+	, search_command(new SearchCommand)
+	, edit_command(new EditCommand)
 {
 	commands_map.insert(std::make_pair("add", add_command));
 	commands_map.insert(std::make_pair("delete", delete_command));
 	commands_map.insert(std::make_pair("print", print_command));
 	commands_map.insert(std::make_pair("help", help_command));
 	commands_map.insert(std::make_pair("exit", exit_command));
+	commands_map.insert(std::make_pair("search", search_command));
+	commands_map.insert(std::make_pair("edit", edit_command));
 
 	FileManagement fileManagement;
 	std::ifstream myfile("data.txt");
 	cars_rentals = fileManagement.readFile(myfile);
-}
-
-CarRental::CarRental(std::string name, double price)
-	:name_(name),
-	price_(price)
-{
-
 }
 
 void CarRental::execute()
@@ -55,6 +52,8 @@ CarRental::~CarRental()
 	delete delete_command;
 	delete  print_command;
 	delete   help_command;
+	delete   search_command;
+	delete   edit_command;
 }
 
 std::string CarRental::name()const

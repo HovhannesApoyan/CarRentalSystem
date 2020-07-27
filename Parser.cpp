@@ -5,6 +5,11 @@ Parser::Parser(std::string infoLine)
 {
 }
 
+void Parser::setInfoLine(const std::string& new_info_line)
+{
+	infoLine = new_info_line;
+}
+
 bool Parser::parsingNamePrice(std::string& name, double& price)
 {
 	auto it = std::find(infoLine.begin(), infoLine.end(), ' ');
