@@ -27,14 +27,18 @@ bool Parser::parsingNamePrice(std::string& name, double& price)
 				{
 					++count;
 				}
-				else if (strPrice[i] < '0' || strPrice[i] > '9')
+				else if (!isdigit(strPrice[i]))
 				{
 					return false;
 				}
 			}
-			if (count <= 1)
+			if (count <= 1 && strPrice != ".")
 			{
 				price = std::stod(strPrice);
+			}
+			else
+			{
+				return false;
 			}
 		}
 		else
