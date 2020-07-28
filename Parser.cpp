@@ -21,18 +21,20 @@ bool Parser::parsingNamePrice(std::string& name, double& price)
 			name = std::string(it + 1, it_name);
 			std::string strPrice(std::next(it_name), infoLine.end());
 			int count = 0;
+			/*size_t sz_d;//TODO
+			double p_d = std::stod(strPrice, &sz_d);
+			if (strPrice[0] != '-' && sz_d == strPrice.size())
+				price = p_d;*/
 			for (int i = 0; i < strPrice.size(); ++i)
 			{
 				if (strPrice[i] == '.')
-				{
 					++count;
-				}
 				else if (!isdigit(strPrice[i]))
-				{
 					return false;
-				}
+				if (count > 1)
+					return false;
 			}
-			if (count <= 1 && strPrice != ".")
+			if (strPrice != ".")
 			{
 				price = std::stod(strPrice);
 			}
