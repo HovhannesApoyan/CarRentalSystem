@@ -8,22 +8,20 @@
 class AddCommand : public AbstractCommands
 {
 public:
-	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& infoLine)override
+	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line)override
 	{
-		Parser parser(infoLine);
+		Parser parser;
 		std::string name;
 		double price;
-		if (parser.parsingNamePrice(name, price))
-		{
-			Car car(name, price);
-			cars_rentals.push_back(car);
-			FileManagement fileManagement;
-			fileManagement.writeFile(name, price);
-		}
-		else
+		if (!parser.parsingNamePrice(info_line, name, price))
 		{
 			std::cout << "not correct name or number!\n";
+			return;
 		}
+		Car car(name, price);
+		cars_rentals.push_back(car);
+		FileManagement fileManagement;
+		fileManagement.writeFile(name, price);
 	}
 };
 #endif

@@ -6,10 +6,7 @@
 class Parser
 {
 public:
-	Parser(std::string infoLine);
-	void setInfoLine(const std::string& new_info_line);
-	bool parsingNamePrice(std::string& name, double& price);
-private:
-	std::string infoLine;
+	Parser() = default;
+	bool parsingNamePrice(const std::string& info_line, std::string& name, double& price);
 };
 #endif

@@ -10,49 +10,40 @@
 class EditCommand : public AbstractCommands
 {
 public:
-	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& infoLine)override
+	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line)override
 	{
-		Parser parser(infoLine);
+		Parser parser;
 		std::string name;
 		double price;
-		if (parser.parsingNamePrice(name, price))
-		{
-			Car car(name, price);
-			auto find_it = std::find(cars_rentals.begin(), cars_rentals.end(), car);
-			if (find_it != cars_rentals.end())
-			{
-				std::string commandLine;
-				std::cout << "new name and price\n";
-				if (getline(std::cin, commandLine))
-				{
-					commandLine.insert(0, "add ");
-					parser.setInfoLine(commandLine);
-					if (parser.parsingNamePrice(name, price))
-					{
-						find_it->setName(name);
-						find_it->setPrice(price);
-						FileManagement fileManagement;
-						fileManagement.writeFile(cars_rentals);
-					}
-					else
-					{
-						std::cout << "not correct name or number!\n";
-					}
-				}
-				else
-				{
-					std::cout << "Not edit!\n";
-				}
-			}
-			else
-			{
-				std::cout << "Not found!\n";
-			}
-		}
-		else
+		if (!parser.parsingNamePrice(info_line, name, price))
 		{
 			std::cout << "not correct name or number!\n";
+			return;
 		}
+		Car car(name, price);
+		auto find_it = std::find(cars_rentals.begin(), cars_rentals.end(), car);
+		if (find_it == cars_rentals.end())
+		{
+			std::cout << "Not found!\n";
+			return;
+		}
+		std::string commandLine;
+		std::cout << "new name and price\n";
+		if (!getline(std::cin, commandLine))
+		{
+			std::cout << "Not edit!\n";
+			return;
+		}
+		commandLine.insert(0, "add ");
+		if (!parser.parsingNamePrice(commandLine, name, price))
+		{
+			std::cout << "not correct name or number!\n";
+			return;
+		}
+		find_it->setName(name);
+		find_it->setPrice(price);
+		FileManagement fileManagement;
+		fileManagement.writeFile(cars_rentals);
 	}
 };
 #endif

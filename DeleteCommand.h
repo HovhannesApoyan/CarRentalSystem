@@ -7,25 +7,23 @@
 class DeleteCommand : public AbstractCommands
 {
 public:
-	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& infoLine)override
+	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line)override
 	{
-		Parser parser(infoLine);
+		Parser parser;
 		std::string name;
 		double price;
-		if (parser.parsingNamePrice(name, price))
-		{
-			cars_rentals.erase(std::remove_if(cars_rentals.begin(), cars_rentals.end(), [=](const Car& c1)
-				{
-					return c1.name() == name && c1.price() == price;
-				}), cars_rentals.end());
-
-			FileManagement fileManagement;
-			fileManagement.writeFile(cars_rentals);
-		}
-		else
+		if (!parser.parsingNamePrice(info_line, name, price))
 		{
 			std::cout << "not correct name or number!\n";
+			return;
 		}
+		cars_rentals.erase(std::remove_if(cars_rentals.begin(), cars_rentals.end(), [=](const Car& c1)
+			{
+				return c1.name() == name && c1.price() == price;
+			}), cars_rentals.end());
+
+		FileManagement fileManagement;
+		fileManagement.writeFile(cars_rentals);
 	}
 };
 #endif
