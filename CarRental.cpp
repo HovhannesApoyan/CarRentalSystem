@@ -29,13 +29,14 @@ void CarRental::execute()
 	std::cout << "command: ";
 	while (getline(std::cin, commandLine))
 	{
+		std::vector<Car> car;
 		auto it_command = std::find(commandLine.begin(), commandLine.end(), ' ');
 		std::string command(commandLine.begin(), it_command);
 		std::map<std::string, AbstractCommands*>::iterator it_map = commands_map.find(command);
 		if (it_map != commands_map.end())
 		{
 			abstract_commands_ptr = (it_map->second);
-			it_map->second->executeCommand(cars_rentals, commandLine);
+			it_map->second->executeCommand(cars_rentals, commandLine, car);
 		}
 		else
 		{

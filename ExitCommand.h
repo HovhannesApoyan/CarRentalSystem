@@ -6,9 +6,9 @@
 class ExitCommand : public AbstractCommands
 {
 public:
-	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& infoLine)override
+	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line, std::vector<Car>& cars) override
 	{
-		if (std::find(infoLine.begin(), infoLine.end(), ' ') == infoLine.end())
+		if (std::find(info_line.begin(), info_line.end(), ' ') == info_line.end())
 		{
 			exit(1);
 		}

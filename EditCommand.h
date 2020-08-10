@@ -6,27 +6,18 @@
 #include "AbstractCommands.h"
 #include "FileManagement.h"
 #include "Parser.h"
+#include "SearchCommand.h"
 
 class EditCommand : public AbstractCommands
 {
 public:
-	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line)override
+	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line, std::vector<Car>& cars) override
 	{
 		Parser parser;
-		std::string name;
-		double price;
-		if (!parser.parsingNamePrice(info_line, name, price))
-		{
-			std::cout << "not correct name or number!\n";
-			return;
-		}
-		Car car(name, price);
-		auto find_it = std::find(cars_rentals.begin(), cars_rentals.end(), car);
-		if (find_it == cars_rentals.end())
-		{
-			std::cout << "Not found!\n";
-			return;
-		}
+		std::string name1;
+		double price1;
+		SearchCommand search;
+		search.executeCommand(cars_rentals, info_line, cars);
 		std::string commandLine;
 		std::cout << "new name and price\n";
 		if (!getline(std::cin, commandLine))
@@ -35,13 +26,17 @@ public:
 			return;
 		}
 		commandLine.insert(0, "add ");
-		if (!parser.parsingNamePrice(commandLine, name, price))
+		if (!parser.parsingNamePrice(commandLine, name1, price1))
 		{
 			std::cout << "not correct name or number!\n";
 			return;
 		}
-		find_it->setName(name);
-		find_it->setPrice(price);
+		Car car(name1, price1);
+		std::replace_if(cars_rentals.begin(), cars_rentals.end(), [=](const Car& c)
+			{
+				return c.name() == cars[0].name() && c.price() == cars[0].price();
+			}
+		, car);
 		FileManagement fileManagement;
 		fileManagement.writeFile(cars_rentals);
 	}

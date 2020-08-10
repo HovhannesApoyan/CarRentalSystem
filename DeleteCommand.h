@@ -7,7 +7,7 @@
 class DeleteCommand : public AbstractCommands
 {
 public:
-	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line)override
+	virtual void executeCommand(std::vector<Car>& cars_rentals, std::string& info_line, std::vector<Car>& cars) override
 	{
 		Parser parser;
 		std::string name;
