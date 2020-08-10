@@ -55,6 +55,7 @@ CarRental::~CarRental()
 	delete   help_command;
 	delete   search_command;
 	delete   edit_command;
+	delete   exit_command;
 }
 
 std::string CarRental::name()const
