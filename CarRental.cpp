@@ -35,8 +35,8 @@ void CarRental::execute()
 		std::map<std::string, AbstractCommands*>::iterator it_map = commands_map.find(command);
 		if (it_map != commands_map.end())
 		{
-			abstract_commands_ptr = (it_map->second);
-			it_map->second->executeCommand(cars_rentals, commandLine, car);
+			abstract_commands_ptr = it_map->second;
+			abstract_commands_ptr->executeCommand(cars_rentals, commandLine, car);
 		}
 		else
 		{
@@ -44,18 +44,6 @@ void CarRental::execute()
 		}
 		std::cout << "command: ";
 	}
-}
-
-CarRental::~CarRental()
-{
-	delete abstract_commands_ptr;
-	delete add_command;
-	delete delete_command;
-	delete  print_command;
-	delete   help_command;
-	delete   search_command;
-	delete   edit_command;
-	delete   exit_command;
 }
 
 std::string CarRental::name()const
@@ -66,4 +54,16 @@ std::string CarRental::name()const
 double CarRental::price()const
 {
 	return price_;
+}
+
+CarRental::~CarRental()
+{
+	delete abstract_commands_ptr;
+	delete add_command;
+	delete delete_command;
+	delete print_command;
+	delete help_command;
+	delete search_command;
+	delete edit_command;
+	delete exit_command;
 }

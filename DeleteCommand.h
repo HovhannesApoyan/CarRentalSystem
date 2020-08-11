@@ -20,7 +20,8 @@ public:
 		cars_rentals.erase(std::remove_if(cars_rentals.begin(), cars_rentals.end(), [=](const Car& c1)
 			{
 				return c1.name() == name && c1.price() == price;
-			}), cars_rentals.end());
+			}
+		), cars_rentals.end());
 
 		FileManagement fileManagement;
 		fileManagement.writeFile(cars_rentals);

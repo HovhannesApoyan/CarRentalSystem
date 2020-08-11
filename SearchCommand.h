@@ -28,6 +28,7 @@ public:
 		}
 		while (find_it != cars_rentals.end())
 		{
+			std::cout << find_it->name() << " " << find_it->price() << "\n";
 			cars.push_back(*find_it);
 			find_it = std::find(find_it + 1, cars_rentals.end(), car);
 		}
