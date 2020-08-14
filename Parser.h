@@ -2,6 +2,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 #include <string>
+#include "boost/lexical_cast.hpp"
+#include <iostream>
 
 class Parser
 {

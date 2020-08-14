@@ -19,29 +19,13 @@ bool Parser::parsingNamePrice(const std::string& info_line, std::string& name, d
 	bool is_integer = true;
 	double q = 0.1;
 	price = 0;
-	for (int i = 0; i < strPrice.size(); ++i)
-	{
-		if (strPrice[i] == '.')
-		{
-			++count;
-			is_integer = false;
-			if (count == 1)
-				continue;
-		}
-		else if (!isdigit(strPrice[i]))
-			return false;
-
-		if (count > 1)
-			return false;
-		if (is_integer)
-			price = price * 10 + static_cast<double>(strPrice[i]) - '0';
-		else
-		{
-			price = price + (static_cast<double>(strPrice[i]) - '0') * q;
-			q /= 10;
-		}
+	try {
+		price = boost::lexical_cast<double>(strPrice);
 	}
-	if (strPrice == ".")
+	catch (const boost::bad_lexical_cast& e) 
+	{
+		std::cout << "Exception caught : " << e.what() << "\n";
 		return false;
+	}
 	return true;
 }
