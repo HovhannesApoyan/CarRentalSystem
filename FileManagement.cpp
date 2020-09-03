@@ -15,6 +15,17 @@ void FileManagement::writeFile(const std::vector<Car>& cars_rentals)
 	myfile.close();
 }
 
+void FileManagement::addToFile(const std::string& path, const std::vector<Car>& cars_rentals)
+{
+	myfile.open(path, std::ios::in | std::ios::app | std::ios::binary);
+	for (auto it = cars_rentals.begin(); it != cars_rentals.end(); ++it)
+	{
+		myfile << it->name() << "/" << it->price() << "\n";
+	}
+	myfile.close();
+}
+
+
 void FileManagement::writeFile(const std::string& name, const double price)
 {
 	myfile.open("data.txt", std::ios::in | std::ios::app | std::ios::binary);

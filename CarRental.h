@@ -17,6 +17,7 @@
 #include "ExitCommand.h"
 #include "SearchCommand.h"
 #include "EditCommand.h"
+#include "RentCommand.h"
 
 class CarRental
 {
@@ -40,5 +41,6 @@ private:
 	ExitCommand* exit_command;
 	SearchCommand* search_command;
 	EditCommand* edit_command;
+	RentCommand* rent_command;
 };
 #endif

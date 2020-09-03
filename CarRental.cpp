@@ -3,6 +3,7 @@
 CarRental::CarRental()
 	:abstract_commands_ptr(nullptr)
 	, add_command(new AddCommand)
+	, rent_command(new RentCommand)
 	, delete_command(new DeleteCommand)
 	, print_command(new PrintCommand)
 	, help_command(new HelpCommand)
@@ -11,6 +12,7 @@ CarRental::CarRental()
 	, edit_command(new EditCommand)
 {
 	commands_map.insert(std::make_pair("add", add_command));
+	commands_map.insert(std::make_pair("rent", rent_command));
 	commands_map.insert(std::make_pair("delete", delete_command));
 	commands_map.insert(std::make_pair("print", print_command));
 	commands_map.insert(std::make_pair("help", help_command));
